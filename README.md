@@ -1,24 +1,41 @@
+# VCC Authentication Service
 
-**To Update/Deploy**
+Flask service for automated Extend and Privacy VCC authentication on Google Cloud. Handles login, OTP verification, and token extraction via browser automation.
 
-- Ensure Google cloud artifacte reigstry, cloud run, firebase database setup access added
+## Features
 
-run: gcloud auth login
+- Multi-platform support (Extend/Privacy)
+- Automated browser auth with Camoufox
+- Firebase OTP integration & token caching
+- Proxy rotation support
+- CORS enabled
 
-- gcloud builds submit --tag gcr.io/xbot-2b603/extend-auth
+## Quick Setup
 
-gcloud run deploy extend-auth \
---image=gcr.io/xbot-2b603/extend-auth \
---platform=managed \
---region=us-central1 \
---allow-unauthenticated
+1. **Install**
+bash
+pip install flask flask-cors google-cloud-firestore camoufox
 
-- replace "xbot-2b603" with your cloud project id
+Configure
 
-- To see projects: gcloud projects list
 
-- To switch projects: gcloud config set project xbot-2b603
+Add Firebase service.json credentials
+Create proxies.txt (optional): host:port:user:pass
 
-- To see current project: gcloud config get-value project
 
-https://extend-auth-247357760734.us-central1.run.app
+Deploy to Google Cloud
+
+bashgcloud run deploy --source . --allow-unauthenticated
+API Usage
+POST /authtask
+bashcurl -X POST https://your-url/authtask \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "user@example.com",
+    "password": "password",
+    "type": "Privacy"
+  }'
+Response:
+json{
+  "access_token": "eyJhbGc..."
+}
