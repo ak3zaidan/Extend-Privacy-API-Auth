@@ -19,14 +19,16 @@ pip install flask flask-cors google-cloud-firestore camoufox
 Configure
 
 
-Add Firebase service.json credentials
-Create proxies.txt (optional): host:port:user:pass
+- Add Firebase service.json credentials
+- Create proxies.txt (optional): host:port:user:pass
 
 
 Deploy to Google Cloud
 
-bashgcloud run deploy --source . --allow-unauthenticated
-API Usage
+- gcloud run deploy --source . --allow-unauthenticated
+
+> API Usage
+```
 POST /authtask
 bashcurl -X POST https://your-url/authtask \
   -H "Content-Type: application/json" \
@@ -35,7 +37,10 @@ bashcurl -X POST https://your-url/authtask \
     "password": "password",
     "type": "Privacy"
   }'
+```
 Response:
+```
 json{
   "access_token": "eyJhbGc..."
 }
+```
