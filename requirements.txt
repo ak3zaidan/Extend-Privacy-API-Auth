@@ -1,0 +1,6 @@
+google-cloud-firestore
+camoufox[geoip]
+typing_extensions
+google-auth
+flask-cors
+flask
